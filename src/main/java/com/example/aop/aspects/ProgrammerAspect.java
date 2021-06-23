@@ -10,13 +10,22 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
-@Aspect
+@Aspect // A modularization of a concern that cuts across multiple classes
 @Component
 public class ProgrammerAspect {
+    /**
+     * Join point is a point during the execution of a program, such as the execution of a method or the handling of
+     * an exception
+     */
+
+    /**
+     * Advice is a action taken by an aspect at a particular join point
+     */
 
     private static final Logger log = LoggerFactory.getLogger(ProgrammerAspect.class);
 
-    @Pointcut("within(com.example.aop.service.*)")
+    @Pointcut("within(com.example.aop.service.*)") // A predicate that matches join points. Advice is associated
+    // with a pointcut expression and runs at any join point matched by the pointcut
     public final void applicationPackagePointcut() {
         /**
          * This method defines where Pointcut should be present
@@ -24,7 +33,7 @@ public class ProgrammerAspect {
          */
     }
 
-    @Around("applicationPackagePointcut()")
+    @Around("applicationPackagePointcut()") // Advice that surrounds a join point such as method invocation.
     public Object logAround(final ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("Entered:{}.{}() with arguments[s]={}\n", joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(),
