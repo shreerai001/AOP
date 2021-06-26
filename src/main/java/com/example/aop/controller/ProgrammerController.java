@@ -1,6 +1,7 @@
 package com.example.aop.controller;
 
 import com.example.aop.model.ProgrammerEntity;
+import com.example.aop.model.requests.ProgrammerRequest;
 import com.example.aop.service.ProgrammerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +26,8 @@ public class ProgrammerController {
     }
 
     @PostMapping
-    public ResponseEntity<String> getAllProgrammers(@RequestBody ProgrammerEntity programmerEntity) {
+    public ResponseEntity<String> getAllProgrammers(@RequestBody ProgrammerRequest programmerRequest) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(programmerService.saveProgrammer(programmerEntity));
+                .body(programmerService.saveProgrammer(programmerRequest));
     }
 }
