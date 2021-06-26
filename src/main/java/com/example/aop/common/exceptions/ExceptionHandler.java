@@ -17,7 +17,7 @@ public class ExceptionHandler {
     @ResponseBody
     public ServerResponse handleException(Exception exception) {
         if (exception instanceof CustomException) {
-            CustomException customException = (CustomException) exception;
+            var customException = (CustomException) exception;
             return ServerResponseBuilder.errorResponse(customException.getCode(), customException.getMessage());
         }
         log.error(exception.getMessage());

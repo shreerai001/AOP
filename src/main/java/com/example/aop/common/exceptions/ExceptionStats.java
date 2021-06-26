@@ -10,9 +10,9 @@ public enum ExceptionStats {
     UNKNOWN_ERROR(500, "Unknown error...");
 
 
-    private int statusCode;
+    private final int statusCode;
 
-    private String message;
+    private final String message;
 
 
 }

@@ -41,7 +41,7 @@ public class LoggingAspect {
                 Arrays.toString(joinPoint.getArgs()));
         try {
             final Object result = joinPoint.proceed();
-            log.info("Exit: {}.{}() with result={}\n", joinPoint.getSignature().getDeclaringTypeName(),
+            log.info("Exit: {}.{}() \n with result={}\n", joinPoint.getSignature().getDeclaringTypeName(),
                     joinPoint.getSignature().getName(), result);
             return result;
         } catch (IllegalArgumentException illegalArgumentException) {

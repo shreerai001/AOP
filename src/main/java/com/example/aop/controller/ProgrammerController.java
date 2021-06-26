@@ -26,8 +26,9 @@ public class ProgrammerController {
     }
 
     @PostMapping
-    public ResponseEntity<String> getAllProgrammers(@RequestBody ProgrammerRequest programmerRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(programmerService.saveProgrammer(programmerRequest));
+    public ResponseEntity<String> saveProgrammer(@RequestBody ProgrammerRequest programmerRequest) {
+//        return ResponseEntity.status(HttpStatus.CREATED)
+//                .body(programmerService.saveProgrammer(programmerRequest));
+        throw new RuntimeException();
     }
 }
