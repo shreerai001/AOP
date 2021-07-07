@@ -2,6 +2,7 @@ package com.example.aop.aspects;
 
 import com.example.aop.model.ActivityLogEntity;
 import com.example.aop.repository.ActivityLoggerRepository;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -35,7 +36,7 @@ public class LoggingAspect {
     @Pointcut("within(com.example.aop.service.*),(com.example.aop.controller.*)")
     // A predicate that matches join points. Advice is associated
     // with a pointcut expression and runs at any join point matched by the pointcut
-    public final void applicationPackagePointcut() {
+    public  final void applicationPackagePointcut() {
         /**
          * This method defines where Pointcut should be present
          * Without this method @Pointcut expression should be explicitly put on @Around
