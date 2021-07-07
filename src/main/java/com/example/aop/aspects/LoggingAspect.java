@@ -1,5 +1,8 @@
 package com.example.aop.aspects;
 
+import com.example.aop.model.ActivityLogEntity;
+import com.example.aop.repository.ActivityLoggerRepository;
+import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -8,11 +11,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Aspect // A modularization of a concern that cuts across multiple classes
 @Component
+@RequiredArgsConstructor
 public class LoggingAspect {
+
+    private final ActivityLoggerRepository activityLoggerRepository;
+
     /**
      * Join point is a point during the execution of a program, such as the execution of a method or the handling of
      * an exception
@@ -39,6 +47,10 @@ public class LoggingAspect {
         log.info("Entered:{}.{}() \n with arguments={}\n", joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(),
                 Arrays.toString(joinPoint.getArgs()));
+        activityLoggerRepository.save(ActivityLogEntity.builder()
+                .activity(joinPoint.getSignature().getDeclaringTypeName())
+                .localDateTime(LocalDateTime.now())
+                .build());
         try {
             final Object result = joinPoint.proceed();
             log.info("Exit: {}.{}() \n with result={}\n", joinPoint.getSignature().getDeclaringTypeName(),

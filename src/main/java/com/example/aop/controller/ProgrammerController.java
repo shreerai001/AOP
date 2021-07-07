@@ -15,7 +15,7 @@ public class ProgrammerController {
 
     private final ProgrammerService programmerService;
 
-    public ProgrammerController(ProgrammerService programmerService) {
+    public ProgrammerController(final ProgrammerService programmerService) {
         this.programmerService = programmerService;
     }
 
@@ -26,9 +26,8 @@ public class ProgrammerController {
     }
 
     @PostMapping
-    public ResponseEntity<String> saveProgrammer(@RequestBody ProgrammerRequest programmerRequest) {
-//        return ResponseEntity.status(HttpStatus.CREATED)
-//                .body(programmerService.saveProgrammer(programmerRequest));
-        throw new RuntimeException();
+    public ResponseEntity<String> saveProgrammer(@RequestBody final ProgrammerRequest programmerRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(programmerService.saveProgrammer(programmerRequest));
     }
 }

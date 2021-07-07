@@ -4,6 +4,9 @@ import com.example.aop.model.ProgrammerEntity;
 import com.example.aop.model.ProgrammingLanguage;
 import com.example.aop.model.requests.ProgrammerRequest;
 import com.example.aop.repository.ProgrammerRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +24,7 @@ public class ProgrammerService {
         return programmerRepository.findAll();
     }
 
-    public String saveProgrammer(ProgrammerRequest programmerRequest) {
+    public String saveProgrammer(final ProgrammerRequest programmerRequest) {
         return programmerRepository.save(ProgrammerEntity.builder()
                 .fullName(programmerRequest.getFullName())
                 .programmingLanguage(programmerRequest.getProgrammingLanguage().stream()
