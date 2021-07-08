@@ -9,8 +9,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class ServerResponse<T> {
+public class ServerResponse {
     private int status;
     private String message;
-    private T data;
 }

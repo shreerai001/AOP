@@ -12,7 +12,7 @@ public enum ProgrammingLanguage implements Serializable {
     JAVA("java"), PYTHON("python"), SCALA("scala"), RUST("rust"), GOLANG("golang"),
     ASSEMBLY("assembly"), C("c"), CPLUS("c++"), CLOSURE("closure"), HASKELL("haskell");
 
-    private String programmingLanguage;
+    private final String programmingLanguageName;
 
 
 }

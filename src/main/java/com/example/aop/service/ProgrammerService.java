@@ -21,12 +21,14 @@ public class ProgrammerService {
         return programmerRepository.findAll();
     }
 
+
     public String saveProgrammer(final ProgrammerRequest programmerRequest) {
+
         return programmerRepository.save(ProgrammerEntity.builder()
                 .fullName(programmerRequest.getFullName())
                 .programmingLanguage(programmerRequest.getProgrammingLanguage().stream()
                         .map(programmingLanguage -> ProgrammingLanguage.builder()
-                                .name(programmingLanguage.getProgrammingLanguage())
+                                .name(programmingLanguage.getProgrammingLanguageName())
                                 .build()).collect(Collectors.toList()))
                 .build()).getFullName() + " saved";
     }

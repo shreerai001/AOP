@@ -7,7 +7,8 @@ import lombok.Setter;
 @Setter
 public class CustomException extends RuntimeException {
 
-    private int code;
+    private static final long serialVersionUID = 541412398708972109L;
+    private final int code;
 
     public CustomException(ExceptionStats exceptionStats) {
         super(exceptionStats.getMessage());

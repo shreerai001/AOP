@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 @Order(1)
 public class SecurityAspect {
 
-    @Pointcut("within(com.example.aop.service.*),(com.example.aop.controller.*)")
+    @Pointcut("within(com.example.aop.service.*)")
     // A predicate that matches join points. Advice is associated
     // with a pointcut expression and runs at any join point matched by the pointcut
     public final void applicationPackagePointcut() {
-        /**
+        /*
          * This method defines where Pointcut should be present
          * Without this method @Pointcut expression should be explicitly put on @Around
          */
