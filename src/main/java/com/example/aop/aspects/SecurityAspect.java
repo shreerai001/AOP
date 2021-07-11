@@ -25,9 +25,9 @@ public class SecurityAspect {
 
     @Before("applicationPackagePointcut()")
     public void isAuthorize() {
-        if (SecurityContextHolder.getContext() == null
-                || SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
-            throw new CustomException("Unauthorized user", 403);
-        }
+//        if (SecurityContextHolder.getContext() == null
+//                || SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+//            throw new CustomException("Unauthorized user", 403);
+//        }
     }
 }

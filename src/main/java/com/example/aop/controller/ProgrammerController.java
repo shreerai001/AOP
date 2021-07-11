@@ -19,6 +19,7 @@ public class ProgrammerController {
         this.programmerService = programmerService;
     }
 
+
     @GetMapping
     public ResponseEntity<List<ProgrammerEntity>> getAllProgrammers() {
         return ResponseEntity.status(HttpStatus.OK)
@@ -29,5 +30,11 @@ public class ProgrammerController {
     public ResponseEntity<String> saveProgrammer(@RequestBody final ProgrammerRequest programmerRequest) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(programmerService.saveProgrammer(programmerRequest));
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> getString() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(programmerService.test());
     }
 }

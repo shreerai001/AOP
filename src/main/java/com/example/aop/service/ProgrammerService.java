@@ -6,6 +6,7 @@ import com.example.aop.model.requests.ProgrammerRequest;
 import com.example.aop.repository.ProgrammerRepository;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resources;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +18,12 @@ public class ProgrammerService {
         this.programmerRepository = programmerRepository;
     }
 
+    public String test() {
+        return "Hello World";
+    }
+
     public List<ProgrammerEntity> getAllProgrammers() {
+        test();
         return programmerRepository.findAll();
     }
 
