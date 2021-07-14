@@ -18,6 +18,11 @@
         <java.version>11</java.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>net.bull.javamelody</groupId>
+            <artifactId>javamelody-spring-boot-starter</artifactId>
+            <version>1.87.0</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-instrument -->
         <dependency>
             <groupId>org.springframework</groupId>
