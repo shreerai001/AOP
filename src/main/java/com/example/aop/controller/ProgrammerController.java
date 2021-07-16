@@ -32,9 +32,4 @@ public class ProgrammerController {
                 .body(programmerService.saveProgrammer(programmerRequest));
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> getString() {
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(programmerService.test());
-    }
 }
