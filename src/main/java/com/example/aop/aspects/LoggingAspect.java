@@ -1,6 +1,7 @@
 package com.example.aop.aspects;
 
 import com.example.aop.model.ActivityLogEntity;
+import com.example.aop.model.ProgrammerEntity;
 import com.example.aop.repository.ActivityLoggerRepository;
 import com.example.aop.utils.MethodSignatureConst;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 @Aspect // A modularization of a concern that cuts across multiple classes
 @Component
@@ -45,14 +47,10 @@ public class LoggingAspect {
          */
     }
 
-    @AfterReturning(returning = "object", pointcut = "applicationPackagePointcut()")
-    public void logAfterReturning(Object[] object) {
-        log.info("size of object::{}", object.length);
-    }
-
-    @After(value = "applicationPackagePointcut()")
-    public void after(JoinPoint joinPoint) {
-        log.info("size of return type={}", joinPoint.getArgs().length);
+    @AfterReturning(pointcut = "applicationPackagePointcut()", returning = "programmerEntityList")
+    public void afterReturning(JoinPoint joinPoint, List<ProgrammerEntity> programmerEntityList) {
+        log.debug("{}", joinPoint);
+        log.info("result = {} \n size of return type={}", programmerEntityList, programmerEntityList.size());
     }
 
 
@@ -66,16 +64,17 @@ public class LoggingAspect {
                         ? joinPoint.getArgs()[0].toString() : Arrays.toString(joinPoint.getArgs())
         );
         persistLog(methodName);
-        try {
-            final Object result = joinPoint.proceed();
-            log.info("Exit: {}.{}() \n with result={}\n size of result={}", methodName,
-                    joinPoint.getSignature().getName(), result, joinPoint.getArgs().length);
-            return result;
-        } catch (IllegalArgumentException illegalArgumentException) {
-            log.error("Illegal argument:{} in {}.{}()\n", Arrays.toString(joinPoint.getArgs()),
-                    methodName, joinPoint.getSignature().getName());
-            throw illegalArgumentException;
-        }
+//        try {
+//            final Object result = joinPoint.proceed();
+//            log.info("Exit: {}.{}() \n with result={}\n size of result={}", methodName,
+//                    joinPoint.getSignature().getName(), joinPoint.getArgs().length, joinPoint.getArgs());
+//            return result;
+//        } catch (IllegalArgumentException illegalArgumentException) {
+//            log.error("Illegal argument:{} in {}.{}()\n", Arrays.toString(joinPoint.getArgs()),
+//                    methodName, joinPoint.getSignature().getName());
+//            throw illegalArgumentException;
+//        }
+        return joinPoint.proceed();
     }
 
     @EventListener
