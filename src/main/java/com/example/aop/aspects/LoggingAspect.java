@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -47,6 +48,7 @@ public class LoggingAspect {
          */
     }
 
+    @Async
     @AfterReturning(pointcut = "applicationPackagePointcut()", returning = "programmerEntityList")
     public void afterReturning(JoinPoint joinPoint, List<ProgrammerEntity> programmerEntityList) {
         log.debug("{}", joinPoint);
@@ -54,8 +56,9 @@ public class LoggingAspect {
     }
 
 
+    @Async
     @Around("applicationPackagePointcut()") // Advice that surrounds a join point such as method invocation.
-    public final Object logAround(final ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object logAround(final ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().getDeclaringTypeName();
         log.info("Entered:{}.{}() \n with arguments={}\n", methodName,
                 joinPoint.getSignature().getName(),
@@ -87,6 +90,12 @@ public class LoggingAspect {
                 .activity(methodName)
                 .localDateTime(LocalDateTime.now())
                 .build());
+    }
+
+    @Async
+    @AfterThrowing(value = "applicationPackagePointcut()", throwing = "exception")
+    public void logException(final JoinPoint joinPoint, final Exception exception) {
+        log.error("{} at {}", exception.getMessage(), joinPoint.getSignature());
     }
 
 }
